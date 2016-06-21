@@ -1,0 +1,40 @@
+
+On local machine
+----------------
+cd /home/sandy/Downloads/
+unzip code here.
+
+Compiling
+---------
+Import folder "spark-recommendation" as an existing maven project.
+to compile: run as > Maven build and add goals as "clean install"
+This will install project jar at some location (will be specified in the eclipse console). 
+For me it was installed under /home/sandy/.m2/repository/org/wso2/carbon/ml/spark/1.0.0-SNAPSHOT
+
+Copy the jar to the cluster
+---------------------------
+cd /home/sandy/.m2/repository/org/wso2/carbon/ml/spark/1.0.0-SNAPSHOT
+scp -P 2222 spark-1.0.0-SNAPSHOT.jar  user01@localhost:/mapr/mycluster/user/user01/spark/recommendation/input/
+
+
+Create folders on cluster
+--------------------------------
+ssh -p 2222 user01@localhost
+cd /mapr/mycluster/user/user01/
+mkdir -p spark/recommendation/input
+mkdir -p spark/recommendation/output
+
+Copy the input files (on local machine)
+---------------------------------------
+cd /home/sandy/Downloads/spark-recommendation/src/main/resources/recommendation
+scp -P 2222 *.dat  user01@localhost:/mapr/mycluster/user/user01/spark/recommendation/input/
+
+Run the program
+----------------
+ssh -p 2222 user01@localhost
+cd /mapr/mycluster/user/user01/spark/recommendation/input
+rm -rf features/
+rm -rf ../output/
+/opt/mapr/spark/spark-1.5.2/bin/spark-submit --class org.apache.spark.example.Recommendation --master yarn spark-1.0.0-SNAPSHOT.jar 
+
+
