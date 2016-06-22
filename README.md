@@ -1,7 +1,3 @@
-# spark-recommendation
-
-[![Join the chat at https://gitter.im/madawas/spark-recommendation](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/madawas/spark-recommendation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-Sample recommendation application using Apache Spark MLlib Java API.
-
-More Information (http://madawas.tumblr.com/post/121661638179/movie-recommendation-with-apache-spark-and-java)
+Movie recommendation application using Apache Spark MLlib Java API.
+Recommendation model for movie ratings using an iterative algorithm and parallel processing using Apache Spark MLib, MapR, MovieLens data set.
+Collaborative Filtering using ALS algorithm – which recommend items (filter method) based on preference information from many users (collaboration).
